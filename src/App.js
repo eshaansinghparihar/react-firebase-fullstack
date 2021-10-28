@@ -24,6 +24,8 @@ function App() {
         setUser({})
       }
     })},[])
+    console.log(auth)
+    console.log(user)
   return (
     <BrowserRouter>
     <div className="App">
