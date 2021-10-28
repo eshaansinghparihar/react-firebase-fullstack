@@ -1,24 +1,51 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState,useEffect} from 'react';
+import firebaseConfig from './config';
+import { BrowserRouter , Switch, Route ,Redirect} from 'react-router-dom';
+import {onAuthStateChanged, getAuth} from "firebase/auth"
+import Landing from './Landing'
+import Login from './Login'
+import Signup from './Signup'
+import { initializeApp } from '@firebase/app';
 
 function App() {
+  const [user, setUser]=useState({})
+  const app=initializeApp(firebaseConfig)
+  const auth = getAuth()
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user!=={}) 
+      {
+        setUser(user)
+      }
+      else
+      {
+        setUser({})
+      }
+    })},[])
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    {user!==null}
+    <Switch>
+      <Route path="/">
+        <Landing/>
+      </Route>
+      <Redirect to="/"></Redirect>
+    </Switch>
+    :
+    <Switch>
+      <Route path="/">
+        <Login/>
+      </Route>
+      <Route exact path="/signup">
+        <Signup/>
+      </Route>
+      <Redirect to="/"/>
+    </Switch>
     </div>
+    </BrowserRouter>
   );
 }
 
