@@ -24,26 +24,27 @@ function App() {
         setUser({})
       }
     })},[])
+    console.log(user)
   return (
     <BrowserRouter>
     <div className="App">
-    {user!==null}
+    {user!==null ?
     <Switch>
       <Route path="/">
         <Landing/>
       </Route>
-      <Redirect to="/"></Redirect>
+      <Redirect to="/"/>
     </Switch>
     :
     <Switch>
-      <Route path="/">
-        <Login/>
-      </Route>
       <Route exact path="/signup">
         <Signup/>
       </Route>
+      <Route path="/">
+        <Login/>
+      </Route>
       <Redirect to="/"/>
-    </Switch>
+    </Switch>}
     </div>
     </BrowserRouter>
   );
