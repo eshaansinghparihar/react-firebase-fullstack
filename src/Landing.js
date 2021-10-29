@@ -27,7 +27,9 @@ return(
     <div>
     <Greetings data={data}/>
     <AddRecord data={data}/>
-    <Activities/>
+    {data.activity.map(activity=>
+        <Activities activity={activity} user={user}/>
+    ).reverse()}
     </div>
     :
     <Loading/>

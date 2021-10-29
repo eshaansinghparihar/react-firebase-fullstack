@@ -7,12 +7,25 @@
     background-color: #fff;
   }
   
+  .activity {
+    display: block;
+    width: 10vh;
+    height: 10vh;
+    margin: 30px auto;
+    box-shadow: 0 5px 10px 0px #333333;
+    border-radius: 50%;
+  }
   h1{
-    font-weight: 700;
-    color:#F4B400
+    font-weight: 500;
   }
   h2{
     font-weight: 200;
+  }
+  .gain{
+    color:#F4B400
+  }
+  .loss{
+      color:#DB4437
   }
 @media screen and (max-width:480px) {
     .form{
@@ -38,25 +51,20 @@
     box-shadow: 0 2px 10px -3px #333;
     text-align: center;
   }
-  .signout {
+  .delete {
     font-weight: 200;
     border-radius: 100px;
     border: none;
-    background: #1a73e8;
+    background: #DB4437;
     width: 50%;
     padding: 10px;
     color: #FFFFFF;
     margin-top: 25px;
     font-size:16px;
-    box-shadow: 0 2px 10px -3px #719BE6;
+    box-shadow: 0 2px 10px -3px #FF7F7F;
     display: block;
     margin: 55px auto 10px auto;
   }
-  .signout:hover{
-    box-shadow: 0 4px 8px 0px #719BE6;
+  .delete:hover{
+    box-shadow: 0 4px 8px 0px #FF7F7F;
   }
-  .error{
-    color:red;
-    font-size: 14px;
-    font-weight: 500;
-}

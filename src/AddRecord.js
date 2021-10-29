@@ -1,5 +1,5 @@
 import { initializeApp } from "@firebase/app";
-import { doc, getFirestore } from "@firebase/firestore";
+import { arrayUnion, doc, getFirestore, updateDoc } from "@firebase/firestore";
 import React, { useState } from "react";
 import './AddRecord.css'
 import firebaseConfig from "./config";
@@ -19,11 +19,29 @@ function AddRecord({data}){
     function handleSelectChange(event){
         setSelect(event.target.value)
     }
-    function addFood(){
-
+    const addFood=async (food)=>{
+        await updateDoc(activityRef, {
+            activity:arrayUnion(
+                {
+                    name:food.serving_qty+" "+food.serving_unit+" "+food.food_name,
+                    imageUrl:food.photo.highres,
+                    timestamp:Date.now(),
+                    calories:1*(food.nf_calories)
+                }
+            )
+        })
     }
-    function addExercise(){
-
+    const addExercise=async(exercise)=>{
+        await updateDoc(activityRef, {
+            activity:arrayUnion(
+                {
+                    name:exercise.duration_min+" minutes of "+exercise.user_input,
+                    imageUrl:exercise.photo.highres,
+                    timestamp:Date.now(),
+                    calories:-1*(exercise.nf_calories)
+                }
+            )
+        })
     }
     function submitHandler(e){
         setError('')
@@ -47,6 +65,10 @@ function AddRecord({data}){
             else if(result.exercises)
             {
                 addExercise(result.exercises[0])
+            }
+            else if(result.message)
+            {
+                setError(result.message)
             }
         })
         .catch(error=>{
