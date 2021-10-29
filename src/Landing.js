@@ -21,11 +21,11 @@ function Landing({user}){
     }
     useEffect(()=>{
         readData()
-    })
+    },uid)
 return(
    (data.displayName)?
     <div>
-    <Greetings/>
+    <Greetings data={data}/>
     <AddRecord/>
     <Activities/>
     </div>
