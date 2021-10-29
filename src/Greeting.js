@@ -1,5 +1,6 @@
+import { signOut , getAuth} from "@firebase/auth";
 import React, { useState } from "react";
-import './Greetings'
+import './Greeting.css'
 function Greetings({data}){
     let calorieBalance=0;
     const [error,setError]=useState('')
@@ -10,10 +11,26 @@ function Greetings({data}){
     else if (hour < 16) welcomeText = welcomeTypes[1];
     else welcomeText = welcomeTypes[2];
 
-    function signoutHandler(){
-
+    function signoutHandler(e){
+        setError("")
+        e.preventDefault()
+        const auth=getAuth()
+        signOut(auth)
+        .catch(error=>{
+            const errorCode=error.code
+            const errorMessage=errorCode.split("/")
+            setError(errorMessage[1])
+        })
     }
     let activities=data.activity
+    if(activities){
+        activities.map(activity=>{
+            calorieBalance=calorieBalance+activity.calories
+        })
+    }
+    
+
+
 return(
     <div className="form">
     <h1>{calorieBalance.toFixed(2)} kcal</h1>

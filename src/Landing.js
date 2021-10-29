@@ -2,7 +2,7 @@ import { getFirestore, onSnapshot ,doc } from "@firebase/firestore";
 import React, { useEffect , useState} from "react";
 import Activities from "./Activities";
 import AddRecord from "./AddRecord";
-import Greetings from "./Greetings";
+import Greetings from "./Greeting";
 import Loading from "./Loading";
 
 
