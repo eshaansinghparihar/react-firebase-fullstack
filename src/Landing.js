@@ -1,10 +1,36 @@
-import React from "react";
+import { getFirestore, onSnapshot ,doc } from "@firebase/firestore";
+import React, { useEffect , useState} from "react";
+import Activities from "./Activities";
+import AddRecord from "./AddRecord";
+import Greetings from "./Greetings";
+import Loading from "./Loading";
 
-function Landing(){
+
+function Landing({user}){
+    const uid=user.uid
+    const [data,setData]=useState({})
+
+    const readData= ()=>{
+        const db=getFirestore()
+        if(uid)
+        {
+            onSnapshot(doc(db, "users", uid), (doc)=>{
+                setData(doc.data())
+            })
+        }
+    }
+    useEffect(()=>{
+        readData()
+    })
 return(
+   (data.displayName)?
     <div>
-        This is my Landing Component
+    <Greetings/>
+    <AddRecord/>
+    <Activities/>
     </div>
+    :
+    <Loading/>
 )
 }
 export default Landing;

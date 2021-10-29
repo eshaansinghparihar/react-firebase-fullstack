@@ -32,7 +32,7 @@ function App() {
     {user!==null ?
     <Switch>
       <Route path="/">
-        <Landing/>
+        <Landing user={user}/>
       </Route>
       <Redirect to="/"/>
     </Switch>
