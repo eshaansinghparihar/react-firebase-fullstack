@@ -26,7 +26,7 @@ return(
    (data.displayName)?
     <div>
     <Greetings data={data}/>
-    <AddRecord/>
+    <AddRecord data={data}/>
     <Activities/>
     </div>
     :
